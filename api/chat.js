@@ -16,7 +16,6 @@ NAME: Shubham Kashikar
 TITLE: Senior Software Developer / Tech Lead
 LOCATION: United States
 EMAIL: shubhamkashikar29@gmail.com
-GITHUB: https://github.com/skashika
 EXPERIENCE: 8+ years
 
 SUMMARY:
