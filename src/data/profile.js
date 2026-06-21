@@ -6,8 +6,8 @@ export const profile = {
   github: 'https://github.com/skashika',
   linkedin: '#',
   summary:
-    'Full-stack software developer and technical lead with 8+ years of experience building AI-powered self-service kiosks, web applications, cloud APIs, admin dashboards, analytics platforms, and public-sector technology solutions.',
-  heroHighlights: ['Full Stack Engineering', 'AI & RAG Systems', 'Self-Service Kiosks', 'Cloud Architecture'],
+    'Full-stack software developer and technical lead with 8+ years of experience building AI-powered self-service platforms, web applications, cloud APIs, admin dashboards, and analytics solutions across diverse industries.',
+  heroHighlights: ['Full Stack Engineering', 'AI & Intelligent Systems', 'Self-Service Platforms', 'Cloud Architecture'],
 };
 
 export const stats = [
@@ -20,31 +20,31 @@ export const stats = [
 export const skillGroups = [
   {
     title: 'Frontend Engineering',
-    skills: ['Vue 2/3', 'Vuetify 2/3', 'Vite', 'React', 'Material UI', 'Responsive UI', 'Kiosk UI', 'i18n / Multilingual UX'],
+    skills: ['Web Applications', 'Responsive UI', 'Component Architecture', 'Kiosk Interfaces', 'Multilingual UX', 'Accessibility'],
   },
   {
     title: 'Backend & APIs',
-    skills: ['Node.js', 'Express', 'REST APIs', 'Java', 'Microservices', 'JWT', 'RBAC', 'Socket.io', 'API Security'],
+    skills: ['REST APIs', 'Microservices', 'Authentication & Authorization', 'Real-Time Services', 'API Security', 'Server-Side Logic'],
   },
   {
     title: 'Databases & Data',
-    skills: ['PostgreSQL', 'SQL', 'MongoDB', 'Firebase', 'Firestore', 'Supabase', 'Oracle SQL', 'Strapi', 'Data Migration'],
+    skills: ['Relational Databases', 'NoSQL Databases', 'Real-Time Databases', 'Data Modeling', 'Data Migration', 'Query Optimization'],
   },
   {
     title: 'Cloud & DevOps',
-    skills: ['AWS', 'Google Cloud', 'DigitalOcean', 'App Engine', 'Cloud Run', 'Lambda', 'S3', 'GitHub', 'CI/CD', 'Vercel'],
+    skills: ['Cloud Platforms', 'Serverless Architecture', 'CI/CD Pipelines', 'Container Deployment', 'Infrastructure Automation', 'Monitoring'],
   },
   {
     title: 'AI & Automation',
-    skills: ['OpenAI API', 'RAG Pipelines', 'Pinecone', 'Embeddings', 'Prompt Engineering', 'Speech Recognition', 'Azure Speech', 'TensorFlow.js'],
+    skills: ['AI Assistants', 'RAG Pipelines', 'Vector Search', 'Embeddings', 'Prompt Engineering', 'Speech Recognition', 'Workflow Automation'],
   },
   {
     title: 'Integrations & Features',
-    skills: ['Stripe', 'PayPal', 'QR Workflows', 'Record Lookup', 'Document Assistance', 'Video Communication', 'Admin Dashboards', 'Analytics'],
+    skills: ['Payment Processing', 'QR Workflows', 'Record Lookup', 'Document Assistance', 'Video Communication', 'Admin Dashboards', 'Analytics'],
   },
   {
     title: 'Kiosk & Hardware',
-    skills: ['Electron', 'Windows Kiosk Mode', 'WebView', 'Printer Integration', 'Touchscreen Devices', 'Remote Config', 'Device Monitoring'],
+    skills: ['Kiosk Applications', 'Touchscreen Interfaces', 'Printer Integration', 'Device Monitoring', 'Remote Configuration', 'Hardware Deployment'],
   },
   {
     title: 'Leadership',
@@ -57,43 +57,43 @@ export const projects = [
     title: 'Guided Form Platform',
     category: 'AI Workflow',
     description:
-      'A guided form-completion platform designed to help users complete complex forms through structured questions, intelligent validation, multilingual support, and secure session handling.',
-    tags: ['Vue', 'Node.js', 'AI Assistant', 'Government Forms', 'Secure Sessions'],
+      'A guided form-completion platform that helps users complete complex forms through structured questions, intelligent validation, multilingual support, and secure session handling.',
+    tags: ['AI Assistant', 'Guided Workflows', 'Multilingual', 'Secure Sessions'],
   },
   {
     title: 'Self-Service Kiosk Platform',
-    category: 'Government / Self-Service',
+    category: 'Self-Service Platform',
     description:
-      'Interactive kiosk and web platform for government and public service locations with navigation assistance, record lookup, QR access, multilingual FAQs, and remote configuration.',
-    tags: ['Vue', 'Vuetify', 'PostgreSQL', 'Firebase', 'Electron', 'Kiosk Mode'],
+      'Interactive kiosk and web platform for public service locations with navigation assistance, record lookup, QR access, multilingual FAQs, and remote configuration.',
+    tags: ['Kiosk Interface', 'Record Lookup', 'QR Access', 'Remote Config'],
   },
   {
     title: 'AI Knowledge Assistant',
-    category: 'RAG / Search',
+    category: 'AI / Search',
     description:
-      'AI assistant using embeddings, vector search, strict response rules, and domain-specific knowledge bases to answer public-service questions accurately and consistently.',
-    tags: ['OpenAI', 'Pinecone', 'RAG', 'Embeddings', 'Prompt Engineering'],
+      'AI assistant using vector search, strict response rules, and domain-specific knowledge bases to answer public-service questions accurately and consistently.',
+    tags: ['AI Assistant', 'Vector Search', 'Knowledge Base', 'Prompt Engineering'],
   },
   {
     title: 'Video & Staff Communication Platform',
     category: 'Realtime Communication',
     description:
       'On-demand video and communication workflow connecting kiosk users with staff, including presence tracking, queue management, and realtime updates.',
-    tags: ['Socket.io', 'Node.js', 'Vue', 'Firebase', 'Realtime'],
+    tags: ['Video Communication', 'Realtime Updates', 'Queue Management'],
   },
   {
     title: 'Analytics & Usage Intelligence',
     category: 'Data Platform',
     description:
-      'Session analytics platform for kiosk utilization, user flows, language changes, action tracking, and client-level reporting across deployments.',
-    tags: ['PostgreSQL', 'Python', 'Analytics', 'Dashboards', 'JSONB'],
+      'Session analytics platform for platform utilization, user flows, language changes, action tracking, and client-level reporting across deployments.',
+    tags: ['Usage Analytics', 'Reporting Dashboards', 'User Flow Tracking'],
   },
   {
     title: 'Enterprise Data & Microservices',
     category: 'Backend Engineering',
     description:
-      'Built data migration, PL/SQL, Java microservices, business rule workflows, and runtime data-fetch integrations in enterprise environments.',
-    tags: ['Java', 'Microservices', 'SQL', 'PL/SQL', 'Business Rules'],
+      'Built data migration pipelines, microservices, business rule workflows, and runtime data integrations in enterprise environments.',
+    tags: ['Microservices', 'Data Migration', 'Business Rules', 'Enterprise Integration'],
   },
 ];
 
@@ -103,9 +103,9 @@ export const experience = [
     company: 'Advanced Robot Solutions LLC',
     period: 'June 2022 – Present',
     points: [
-      'Lead development of AI-powered kiosks, web applications, admin dashboards, and cloud APIs for government and public-sector clients.',
-      'Architected platforms for record lookup, navigation assistance, QR access, document support, guided form workflows, video communication, analytics, and multilingual search.',
-      'Implemented secure API patterns, RBAC, client-scoped permissions, database migrations, real-time configuration, and deployment workflows.',
+      'Lead development of AI-powered kiosks, web applications, admin dashboards, and cloud APIs for enterprise and large-scale clients.',
+      'Architected platforms for record lookup, navigation assistance, document support, guided form workflows, video communication, analytics, and multilingual search.',
+      'Implemented secure API patterns, role-based access control, client-scoped permissions, database migrations, real-time configuration, and deployment workflows.',
     ],
   },
   {
@@ -113,8 +113,8 @@ export const experience = [
     company: 'Advanced Robot Solutions LLC',
     period: 'June 2021 – May 2022',
     points: [
-      'Built kiosk and browser applications using Vue, Vuetify, Firebase, SQL databases, payment integrations, and realtime services.',
-      'Developed analytics, video calling workflows, multilingual features, and integrations for public-facing service platforms.',
+      'Built kiosk and browser applications with modern frontend frameworks, cloud databases, payment integrations, and realtime services.',
+      'Developed analytics dashboards, video calling workflows, multilingual features, and third-party integrations for public-facing service platforms.',
     ],
   },
   {
@@ -122,7 +122,7 @@ export const experience = [
     company: 'Tech Mahindra Pvt. Ltd.',
     period: 'July 2016 – June 2019',
     points: [
-      'Worked on Java, microservices, business rule management, SQL, MongoDB, PL/SQL data migration, and production data workflows.',
+      'Worked on microservices, business rule management systems, relational and NoSQL databases, data migration pipelines, and production data workflows.',
       'Supported enterprise data processing, runtime integration, and backend service development.',
     ],
   },
