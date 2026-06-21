@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 const STARTERS = [
-  'What is your experience?',
-  'What kind of projects have you built?',
-  'How can I contact Shubham?',
+  'What is RAG and why does it matter?',
+  'What projects has Shubham built?',
+  'What are AI agents and when should I use them?',
 ];
 
 function renderMarkdown(text) {
