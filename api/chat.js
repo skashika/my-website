@@ -162,13 +162,27 @@ RULES
     const data = await response.json();
     const reply = data.content[0].text;
 
-    // Log conversation to Supabase (fire and forget)
+    // Log conversation directly to Firestore
     const userMessage = messages[messages.length - 1]?.content ?? '';
-    fetch(`${process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : 'http://localhost:3000'}/api/log-chat`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ userMessage, botReply: reply, messages }),
-    }).catch(() => {});
+    const projectId = process.env.FIREBASE_PROJECT_ID;
+    const apiKey    = process.env.FIREBASE_API_KEY;
+    if (projectId && apiKey) {
+      fetch(
+        `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/conversations?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            fields: {
+              user_message: { stringValue: userMessage },
+              bot_reply:    { stringValue: reply },
+              messages:     { stringValue: JSON.stringify(messages) },
+              created_at:   { stringValue: new Date().toISOString() },
+            },
+          }),
+        }
+      ).catch(() => {});
+    }
 
     return res.status(200).json({ reply });
   } catch (err) {
