@@ -7,6 +7,7 @@ import SkillsSection from './components/SkillsSection';
 import ProjectsSection from './components/ProjectsSection';
 import ExperienceSection from './components/ExperienceSection';
 import ContactSection from './components/ContactSection';
+import BlogSection from './components/BlogSection';
 import ChatBot from './components/ChatBot';
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
         <SkillsSection />
         <ProjectsSection />
         <ExperienceSection />
+        <BlogSection />
         <ContactSection />
       </main>
       <ChatBot />
