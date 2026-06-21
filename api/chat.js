@@ -160,7 +160,17 @@ RULES
     }
 
     const data = await response.json();
-    return res.status(200).json({ reply: data.content[0].text });
+    const reply = data.content[0].text;
+
+    // Log conversation to Supabase (fire and forget)
+    const userMessage = messages[messages.length - 1]?.content ?? '';
+    fetch(`${process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : 'http://localhost:3000'}/api/log-chat`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ userMessage, botReply: reply, messages }),
+    }).catch(() => {});
+
+    return res.status(200).json({ reply });
   } catch (err) {
     console.error('Handler error:', err);
     return res.status(500).json({ error: 'Internal server error' });

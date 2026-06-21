@@ -9,8 +9,13 @@ import ExperienceSection from './components/ExperienceSection';
 import ContactSection from './components/ContactSection';
 import BlogSection from './components/BlogSection';
 import ChatBot from './components/ChatBot';
+import AdminPage from './components/AdminPage';
 
 export default function App() {
+  if (window.location.pathname === '/admin') {
+    return <AdminPage />;
+  }
+
   return (
     <div className="site-shell">
       <NavBar />
