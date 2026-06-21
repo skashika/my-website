@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 const STARTERS = [
-  'What is RAG and why does it matter?',
-  'What projects has Shubham built?',
-  'What are AI agents and when should I use them?',
+  'What does Shubham specialise in?',
+  'What projects has Shubham worked on?',
+  'How can I contact Shubham?',
 ];
 
 function renderMarkdown(text) {
@@ -118,7 +118,7 @@ export default function ChatBot() {
       const data = await res.json();
       setMessages(prev => [...prev, {
         role: res.ok ? 'assistant' : 'error',
-        text: res.ok ? data.reply : 'Sorry, something went wrong. Please try again.',
+        text: res.ok ? data.reply : (data.error || 'Sorry, something went wrong. Please try again.'),
       }]);
     } catch {
       setMessages(prev => [...prev, { role: 'error', text: 'Could not reach the server. Please try again.' }]);
@@ -204,12 +204,17 @@ export default function ChatBot() {
 
           {/* Input */}
           <div className="chat-input-row">
+            {input.length > 400 && (
+              <div className="chat-char-count" style={{ color: input.length >= 500 ? '#ef4444' : '#f59e0b' }}>
+                {input.length}/500
+              </div>
+            )}
             <input
               ref={inputRef}
               className="chat-input"
               placeholder="Ask me anything…"
               value={input}
-              onChange={e => setInput(e.target.value)}
+              onChange={e => setInput(e.target.value.slice(0, 500))}
               onKeyDown={onKey}
               disabled={loading}
             />

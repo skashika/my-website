@@ -1803,3 +1803,11 @@ img { display: block; max-width: 100%; }
   .wa-sidebar.has-selection { display: none; }
   .wa-main.has-selection    { display: flex; width: 100%; }
 }
+
+/* ─── Chatbot rate-limit & char count ────────────────────────── */
+.chat-char-count {
+  font-size: .75rem;
+  text-align: right;
+  padding: 2px 12px 0;
+  font-weight: 500;
+}

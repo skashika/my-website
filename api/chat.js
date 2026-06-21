@@ -1,11 +1,122 @@
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+const RATE_LIMIT        = 20;   // max messages per window
+const RATE_WINDOW_MS    = 60 * 60 * 1000; // 1 hour
+const MAX_MSG_LENGTH    = 500;
+const MAX_HISTORY       = 20;   // max messages in conversation array
+
+function getIP(req) {
+  return (
+    req.headers['x-forwarded-for']?.split(',')[0].trim() ||
+    req.headers['x-real-ip'] ||
+    req.socket?.remoteAddress ||
+    'unknown'
+  );
+}
+
+async function checkRateLimit(ip) {
+  const projectId = process.env.FIREBASE_PROJECT_ID;
+  const apiKey    = process.env.FIREBASE_API_KEY;
+  if (!projectId || !apiKey) return { allowed: true }; // skip if not configured
+
+  const safeKey  = encodeURIComponent(ip.replace(/[:.]/g, '_'));
+  const docUrl   = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/rate_limits/${safeKey}?key=${apiKey}`;
+
+  // Fetch existing record
+  const getRes  = await fetch(docUrl);
+  const now     = Date.now();
+  let count     = 0;
+  let windowStart = now;
+
+  if (getRes.ok) {
+    const doc = await getRes.json();
+    const storedWindow = parseInt(doc.fields?.window_start?.integerValue ?? 0);
+    const storedCount  = parseInt(doc.fields?.count?.integerValue ?? 0);
+    if (now - storedWindow < RATE_WINDOW_MS) {
+      count       = storedCount;
+      windowStart = storedWindow;
+    }
   }
 
+  if (count >= RATE_LIMIT) {
+    const retryAfter = Math.ceil((windowStart + RATE_WINDOW_MS - now) / 60000);
+    return { allowed: false, retryAfter };
+  }
+
+  // Write updated count (PATCH = create or update)
+  await fetch(`${docUrl}&updateMask.fieldPaths=count&updateMask.fieldPaths=window_start`, {
+    method: 'PATCH',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      fields: {
+        count:        { integerValue: String(count + 1) },
+        window_start: { integerValue: String(windowStart) },
+      },
+    }),
+  });
+
+  return { allowed: true, remaining: RATE_LIMIT - count - 1 };
+}
+
+export default async function handler(req, res) {
+  // ── CORS ───────────────────────────────────────────────────────
+  const allowedOrigins = [
+    'https://shubhamkashikar.com',
+    'https://www.shubhamkashikar.com',
+    /\.vercel\.app$/,
+  ];
+  const origin = req.headers['origin'] || '';
+  const originOk = !origin || allowedOrigins.some(o =>
+    typeof o === 'string' ? o === origin : o.test(origin)
+  );
+  if (!originOk) return res.status(403).json({ error: 'Forbidden' });
+  if (origin) res.setHeader('Access-Control-Allow-Origin', origin);
+
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    return res.status(204).end();
+  }
+
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  // ── Basic bot detection ────────────────────────────────────────
+  const ua = req.headers['user-agent'] || '';
+  const ct = req.headers['content-type'] || '';
+  if (!ua || !ct.includes('application/json')) {
+    return res.status(400).json({ error: 'Bad request' });
+  }
+
+  // ── Input validation ───────────────────────────────────────────
   const { messages } = req.body;
-  if (!messages || !Array.isArray(messages)) {
+  if (!messages || !Array.isArray(messages) || messages.length === 0) {
     return res.status(400).json({ error: 'Invalid request' });
+  }
+  if (messages.length > MAX_HISTORY) {
+    return res.status(400).json({ error: 'Conversation too long' });
+  }
+  const lastMsg = messages[messages.length - 1];
+  if (!lastMsg?.content || typeof lastMsg.content !== 'string') {
+    return res.status(400).json({ error: 'Invalid message' });
+  }
+  if (lastMsg.content.trim().length === 0) {
+    return res.status(400).json({ error: 'Empty message' });
+  }
+  if (lastMsg.content.length > MAX_MSG_LENGTH) {
+    return res.status(400).json({ error: `Message too long (max ${MAX_MSG_LENGTH} characters)` });
+  }
+
+  // ── Rate limiting ──────────────────────────────────────────────
+  const ip = getIP(req);
+  try {
+    const rate = await checkRateLimit(ip);
+    if (!rate.allowed) {
+      return res.status(429).json({
+        error: `Too many messages. Please wait ${rate.retryAfter} minute(s) before trying again.`,
+      });
+    }
+    res.setHeader('X-RateLimit-Remaining', rate.remaining ?? '');
+  } catch (e) {
+    console.error('Rate limit check failed:', e);
+    // Fail open — don't block users if rate limit check errors
   }
 
   const systemPrompt = `You are a helpful assistant on Shubham Kashikar's personal portfolio website. Answer questions about Shubham, his work, and any topics covered in his blog — in a friendly, concise, and professional tone.
