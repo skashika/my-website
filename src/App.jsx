@@ -7,6 +7,7 @@ import SkillsSection from './components/SkillsSection';
 import ProjectsSection from './components/ProjectsSection';
 import ExperienceSection from './components/ExperienceSection';
 import ContactSection from './components/ContactSection';
+import ChatBot from './components/ChatBot';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <ExperienceSection />
         <ContactSection />
       </main>
+      <ChatBot />
     </div>
   );
 }

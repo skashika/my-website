@@ -16,7 +16,6 @@ export default function ContactSection() {
             <a href={`mailto:${profile.email}`} className="contact-email">{profile.email}</a>
             <div className="contact-btns">
               <a href={`mailto:${profile.email}`} className="btn btn-contact-primary">Send an Email</a>
-              <a href={profile.github} target="_blank" rel="noreferrer" className="btn btn-contact-secondary">GitHub Profile</a>
             </div>
           </div>
         </div>
@@ -29,7 +28,6 @@ export default function ContactSection() {
             <a href="#top">Top</a>
             <a href="#projects">Projects</a>
             <a href={`mailto:${profile.email}`}>Email</a>
-            <a href={profile.github} target="_blank" rel="noreferrer">GitHub</a>
           </div>
         </div>
       </footer>
