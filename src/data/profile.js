@@ -6,14 +6,14 @@ export const profile = {
   github: 'https://github.com/skashika',
   linkedin: '#',
   summary:
-    'Full-stack software developer and technical lead with 8+ years of experience building AI-powered kiosks, web applications, cloud APIs, admin dashboards, analytics platforms, and government technology solutions.',
-  heroHighlights: ['Full Stack Engineering', 'AI & RAG Systems', 'GovTech / Court Kiosks', 'Cloud Architecture'],
+    'Full-stack software developer and technical lead with 8+ years of experience building AI-powered self-service kiosks, web applications, cloud APIs, admin dashboards, analytics platforms, and public-sector technology solutions.',
+  heroHighlights: ['Full Stack Engineering', 'AI & RAG Systems', 'Self-Service Kiosks', 'Cloud Architecture'],
 };
 
 export const stats = [
   { value: '8+', label: 'Years Experience' },
   { value: '3+', label: 'Team Leadership' },
-  { value: '20+', label: 'Court / GovTech Deployments' },
+  { value: '20+', label: 'Live Deployments' },
   { value: 'End-to-End', label: 'Product Delivery' },
 ];
 
@@ -39,8 +39,8 @@ export const skillGroups = [
     skills: ['OpenAI API', 'RAG Pipelines', 'Pinecone', 'Embeddings', 'Prompt Engineering', 'Speech Recognition', 'Azure Speech', 'TensorFlow.js'],
   },
   {
-    title: 'Integrations & Products',
-    skills: ['Stripe', 'PayPal', 'QR Workflows', 'Hearing Lookup', 'E-Filing Help', 'Telepresence', 'Admin Dashboards', 'Analytics'],
+    title: 'Integrations & Features',
+    skills: ['Stripe', 'PayPal', 'QR Workflows', 'Record Lookup', 'Document Assistance', 'Video Communication', 'Admin Dashboards', 'Analytics'],
   },
   {
     title: 'Kiosk & Hardware',
@@ -54,17 +54,17 @@ export const skillGroups = [
 
 export const projects = [
   {
-    title: 'FormFlow',
-    category: 'AI Workflow Product',
+    title: 'Guided Form Platform',
+    category: 'AI Workflow',
     description:
       'A guided form-completion platform designed to help users complete complex forms through structured questions, intelligent validation, multilingual support, and secure session handling.',
     tags: ['Vue', 'Node.js', 'AI Assistant', 'Government Forms', 'Secure Sessions'],
   },
   {
-    title: 'Court Kiosk Platform',
-    category: 'GovTech / Self-Service',
+    title: 'Self-Service Kiosk Platform',
+    category: 'Government / Self-Service',
     description:
-      'Interactive kiosk and web platform for courts, counties, and public service locations with wayfinding, hearing lookup, QR access, multilingual FAQs, and remote configuration.',
+      'Interactive kiosk and web platform for government and public service locations with navigation assistance, record lookup, QR access, multilingual FAQs, and remote configuration.',
     tags: ['Vue', 'Vuetify', 'PostgreSQL', 'Firebase', 'Electron', 'Kiosk Mode'],
   },
   {
@@ -75,14 +75,14 @@ export const projects = [
     tags: ['OpenAI', 'Pinecone', 'RAG', 'Embeddings', 'Prompt Engineering'],
   },
   {
-    title: 'Telepresence & Clerk Connect',
+    title: 'Video & Staff Communication Platform',
     category: 'Realtime Communication',
     description:
       'On-demand video and communication workflow connecting kiosk users with staff, including presence tracking, queue management, and realtime updates.',
     tags: ['Socket.io', 'Node.js', 'Vue', 'Firebase', 'Realtime'],
   },
   {
-    title: 'Analytics & Session Intelligence',
+    title: 'Analytics & Usage Intelligence',
     category: 'Data Platform',
     description:
       'Session analytics platform for kiosk utilization, user flows, language changes, action tracking, and client-level reporting across deployments.',
@@ -92,8 +92,8 @@ export const projects = [
     title: 'Enterprise Data & Microservices',
     category: 'Backend Engineering',
     description:
-      'Built data migration, PL/SQL, Java microservices, BRMS workflows, and runtime data-fetch/scanner integrations in enterprise environments.',
-    tags: ['Java', 'Microservices', 'SQL', 'PL/SQL', 'BRMS'],
+      'Built data migration, PL/SQL, Java microservices, business rule workflows, and runtime data-fetch integrations in enterprise environments.',
+    tags: ['Java', 'Microservices', 'SQL', 'PL/SQL', 'Business Rules'],
   },
 ];
 
@@ -103,8 +103,8 @@ export const experience = [
     company: 'Advanced Robot Solutions LLC',
     period: 'June 2022 – Present',
     points: [
-      'Lead development of AI-powered kiosks, web applications, admin dashboards, and cloud APIs for courts and government clients.',
-      'Architected products for hearing lookup, wayfinding, QR access, e-filing support, FormFlow, telepresence, analytics, and multilingual FAQ search.',
+      'Lead development of AI-powered kiosks, web applications, admin dashboards, and cloud APIs for government and public-sector clients.',
+      'Architected platforms for record lookup, navigation assistance, QR access, document support, guided form workflows, video communication, analytics, and multilingual search.',
       'Implemented secure API patterns, RBAC, client-scoped permissions, database migrations, real-time configuration, and deployment workflows.',
     ],
   },
@@ -113,7 +113,7 @@ export const experience = [
     company: 'Advanced Robot Solutions LLC',
     period: 'June 2021 – May 2022',
     points: [
-      'Built kiosk/browser applications using Vue, Vuetify, Firebase, SQL databases, payment integrations, and realtime services.',
+      'Built kiosk and browser applications using Vue, Vuetify, Firebase, SQL databases, payment integrations, and realtime services.',
       'Developed analytics, video calling workflows, multilingual features, and integrations for public-facing service platforms.',
     ],
   },
@@ -122,7 +122,7 @@ export const experience = [
     company: 'Tech Mahindra Pvt. Ltd.',
     period: 'July 2016 – June 2019',
     points: [
-      'Worked on Java, microservices, Business Rule Management System, SQL, MongoDB, PL/SQL data migration, and production data workflows.',
+      'Worked on Java, microservices, business rule management, SQL, MongoDB, PL/SQL data migration, and production data workflows.',
       'Supported enterprise data processing, runtime integration, and backend service development.',
     ],
   },
