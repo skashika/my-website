@@ -41,7 +41,7 @@ export default async function handler(req, res) {
         const f = r.document.fields;
         return {
           id:           r.document.name,
-          created_at:   f.created_at?.stringValue ?? '',
+          created_at:   f.created_at?.stringValue ?? f.updated_at?.stringValue ?? '',
           user_message: f.user_message?.stringValue ?? '',
           bot_reply:    f.bot_reply?.stringValue ?? '',
           messages:     JSON.parse(f.messages?.stringValue ?? '[]'),

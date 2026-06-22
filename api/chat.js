@@ -292,8 +292,7 @@ RULES
                 user_message: { stringValue: userMessage },
                 bot_reply:    { stringValue: reply },
                 messages:     { stringValue: JSON.stringify(allMessages) },
-                updated_at:   { stringValue: new Date().toISOString() },
-                // created_at only set on first write — Firestore keeps existing value on PATCH if field present
+                created_at:   { stringValue: new Date().toISOString() },
               },
             }),
           }
