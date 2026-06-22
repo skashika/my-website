@@ -4,8 +4,8 @@ import { profile } from '../data/profile';
 
 const SITE_URL = typeof window !== 'undefined' ? window.location.origin : 'https://shubhamkashikar.com';
 
-function downloadVCard() {
-  const vcard = [
+function buildVCard() {
+  return [
     'BEGIN:VCARD',
     'VERSION:3.0',
     `FN:${profile.name}`,
@@ -16,6 +16,10 @@ function downloadVCard() {
     `NOTE:Full-stack software developer and technical lead with 8+ years of experience.`,
     'END:VCARD',
   ].join('\n');
+}
+
+function downloadVCard() {
+  const vcard = buildVCard();
 
   const blob = new Blob([vcard], { type: 'text/vcard' });
   const url  = URL.createObjectURL(blob);
@@ -153,16 +157,16 @@ export default function BusinessCard({ onClose }) {
           <div className="bc-qr-wrap">
             <div className="bc-qr-card">
               <QRCodeSVG
-                value={SITE_URL}
+                value={buildVCard()}
                 size={200}
                 bgColor="#ffffff"
                 fgColor="#0f172a"
-                level="H"
+                level="M"
                 includeMargin={false}
               />
             </div>
-            <p className="bc-qr-label">Scan to visit portfolio</p>
-            <p className="bc-qr-url">{SITE_URL}</p>
+            <p className="bc-qr-label">Scan to save contact</p>
+            <p className="bc-qr-url">{profile.email}</p>
             <div className="bc-actions" style={{ marginTop: 20 }}>
               <button className="btn btn-primary bc-btn" onClick={downloadVCard}>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none">

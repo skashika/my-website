@@ -79,6 +79,10 @@ function inlineFormat(text) {
   });
 }
 
+function generateSessionId() {
+  return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+}
+
 export default function ChatBot() {
   const [open, setOpen]         = useState(false);
   const [messages, setMessages] = useState([
@@ -88,6 +92,7 @@ export default function ChatBot() {
   const [loading, setLoading] = useState(false);
   const bottomRef             = useRef(null);
   const inputRef              = useRef(null);
+  const sessionId             = useRef(generateSessionId());
 
   useEffect(() => {
     if (open) {
@@ -113,7 +118,7 @@ export default function ChatBot() {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ messages: history }),
+        body: JSON.stringify({ messages: history, sessionId: sessionId.current }),
       });
       const data = await res.json();
       setMessages(prev => [...prev, {

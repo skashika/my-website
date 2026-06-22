@@ -86,7 +86,7 @@ export default async function handler(req, res) {
   }
 
   // ── Input validation ───────────────────────────────────────────
-  const { messages } = req.body;
+  const { messages, sessionId } = req.body;
   if (!messages || !Array.isArray(messages) || messages.length === 0) {
     return res.status(400).json({ error: 'Invalid request' });
   }
@@ -273,23 +273,27 @@ RULES
     const data = await response.json();
     const reply = data.content[0].text;
 
-    // Log conversation directly to Firestore (awaited so Vercel doesn't cut it off)
+    // Upsert full conversation into one Firestore doc per session
     const userMessage = messages[messages.length - 1]?.content ?? '';
     const projectId = process.env.FIREBASE_PROJECT_ID;
     const apiKey    = process.env.FIREBASE_API_KEY;
+    const safeSession = (sessionId ?? `anon-${Date.now()}`).replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 64);
     if (projectId && apiKey) {
       try {
+        // PATCH creates or overwrites the document with this sessionId as the doc ID
+        const allMessages = [...messages, { role: 'assistant', content: reply }];
         const logRes = await fetch(
-          `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/conversations?key=${apiKey}`,
+          `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/conversations/${safeSession}?key=${apiKey}`,
           {
-            method: 'POST',
+            method: 'PATCH',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({
               fields: {
                 user_message: { stringValue: userMessage },
                 bot_reply:    { stringValue: reply },
-                messages:     { stringValue: JSON.stringify(messages) },
-                created_at:   { stringValue: new Date().toISOString() },
+                messages:     { stringValue: JSON.stringify(allMessages) },
+                updated_at:   { stringValue: new Date().toISOString() },
+                // created_at only set on first write — Firestore keeps existing value on PATCH if field present
               },
             }),
           }

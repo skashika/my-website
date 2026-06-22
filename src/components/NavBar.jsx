@@ -36,6 +36,7 @@ export default function NavBar() {
             <a href="#skills"     onClick={() => setOpen(false)}>Skills</a>
             <a href="#projects"   onClick={() => setOpen(false)}>Projects</a>
             <a href="#experience" onClick={() => setOpen(false)}>Experience</a>
+            <a href="#timeline"   onClick={() => setOpen(false)}>Journey</a>
             <a href="#blog"       onClick={() => setOpen(false)}>Blog</a>
             <button
               className="nav-card-btn"
