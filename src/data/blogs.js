@@ -427,6 +427,62 @@ Logic errors, security issues, performance problems, missing edge cases  these m
 
 The goal of a code review is not to prove you're smart or to get the code to look exactly how you would have written it. The goal is to ship better software. Keep that as the anchor and most of the bad habits take care of themselves.`,
   },
+  // ── AI & Intelligent Systems (continued) ─────────────────────
+  {
+    id: 'how-to-check-if-ai-is-helping',
+    category: 'AI & Intelligent Systems',
+    title: 'How to Check if AI is Actually Helping',
+    excerpt: 'Adding AI to your product is easy. Knowing whether it is making things better or worse is the hard part. Here is how to measure it honestly.',
+    readTime: '5 min read',
+    content: `Everyone is adding AI to their products right now. Chatbots, auto-summaries, smart recommendations, generated content. The question nobody asks loudly enough is: how do you actually know if it is helping?
+
+"It feels smart" is not a measurement. Here is how to check for real.
+
+**Start with a baseline**
+
+Before you can measure improvement, you need to know where you started. If you are adding an AI chatbot to handle customer questions, write down the current numbers first: how many questions come in per day, how many get resolved without human involvement, how long it takes, what the satisfaction score is.
+
+If you skip this step, you will have no reference point. You will just have a feeling — and feelings are easy to manipulate in any direction.
+
+**Measure the right things**
+
+The metric you pick matters more than how you measure it. Common traps:
+
+- **Measuring usage instead of value.** High chatbot engagement just means people are talking to it. It does not mean it is helping. Measure resolution rate, not conversation count.
+- **Measuring what is easy to count.** Response time is easy to track. Whether the response was actually correct is harder. Do the harder thing.
+- **Ignoring what people do after.** If users close the chat and immediately call your support line, the AI did not help. Look at downstream behaviour, not just the interaction itself.
+
+**The three questions worth asking**
+
+For any AI feature, ask:
+
+1. **Did people get what they needed?** Completion rate, task success, resolution without escalation.
+2. **Was the AI accurate?** Sample real conversations regularly. Read them. Human review of a random 50 conversations per week tells you more than any automated metric.
+3. **Did it make the experience better or just different?** Ask users directly with a short survey. One question: "Did this help you?" is often enough.
+
+**Watch for harm, not just failure**
+
+AI does not just fail silently. It can actively mislead. A chatbot that confidently gives wrong information is worse than one that says it does not know. Set up a way to flag and review bad outputs before users report them to you publicly.
+
+Check for:
+- Responses that contradict your actual policy or product
+- Answers that are technically correct but contextually wrong
+- Cases where the AI was confident but the user still left unsatisfied
+
+**Run a comparison if you can**
+
+If you have enough traffic, the cleanest test is an A/B split: some users get the AI feature, others do not. Compare outcomes between the two groups. This removes the bias of "things just got better over time" and tells you what the AI is specifically responsible for.
+
+If you cannot run a proper split, compare a period before launch with a period after. Account for seasonality and other changes happening at the same time.
+
+**When to admit it is not working**
+
+This is the part most teams skip. Set a threshold in advance. If resolution rate does not improve by X percent within 60 days, you will revisit the approach. Having this agreed before launch removes the pressure to defend something that is not delivering.
+
+AI that is not helping is not neutral. It costs money to run, it creates maintenance burden, and it can quietly erode trust with users who had a bad experience and never came back.
+
+Measure honestly. Adjust early. The goal is not to have AI — the goal is to solve the problem.`,
+  },
 ];
 
 export const blogCategories = ['All', 'AI & Intelligent Systems', 'Full Stack / Cloud', 'Career & Leadership'];

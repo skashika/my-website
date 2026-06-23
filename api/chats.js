@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   const apiKey    = process.env.FIREBASE_API_KEY;
 
   try {
-    // Query Firestore — order by created_at desc
+    // Fetch all conversation documents (no orderBy to avoid index requirement)
     const response = await fetch(
       `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents:runQuery?key=${apiKey}`,
       {
@@ -19,7 +19,6 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           structuredQuery: {
             from: [{ collectionId: 'conversations' }],
-            orderBy: [{ field: { fieldPath: 'created_at' }, direction: 'DESCENDING' }],
             limit: 200,
           },
         }),
@@ -46,7 +45,8 @@ export default async function handler(req, res) {
           bot_reply:    f.bot_reply?.stringValue ?? '',
           messages:     JSON.parse(f.messages?.stringValue ?? '[]'),
         };
-      });
+      })
+      .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
     return res.status(200).json(chats);
   } catch (err) {

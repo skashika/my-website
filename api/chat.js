@@ -238,6 +238,15 @@ BLOG 10: How I Approach Code Reviews Without Being That Person
 5. Review the right things — logic errors, security issues, performance problems, missing edge cases. Not tabs vs spaces or exact variable naming.
 The goal of a code review is to ship better software — not to prove you are smart or get the code to look exactly how you would have written it.
 
+BLOG 11: How to Check if AI is Actually Helping
+Adding AI to a product is easy. Knowing whether it is making things better or worse is the hard part.
+Start with a baseline: before launching any AI feature, record current numbers — resolution rate, time to completion, satisfaction score. Without a baseline you have no reference point, only feelings.
+Measure the right things: (1) Measure resolution not just usage — high engagement does not mean the AI helped. (2) Measure accuracy, not just speed — sample real conversations weekly and read them. (3) Look at what users do after — if they close the chat and call support, the AI did not help.
+Three questions worth asking for any AI feature: Did people get what they needed? Was the AI accurate? Did it make the experience better or just different?
+Watch for harm, not just failure: AI that confidently gives wrong information is worse than one that says it does not know. Review outputs regularly before users report problems publicly.
+Run a comparison if possible: A/B test AI vs no-AI, or compare before/after launch periods. Set a threshold in advance — if resolution rate does not improve by X percent in 60 days, revisit the approach.
+AI that is not helping is not neutral — it costs money, creates maintenance burden, and erodes user trust. Measure honestly and adjust early.
+
 ═══════════════════════════════════════
 RULES
 ═══════════════════════════════════════
