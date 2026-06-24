@@ -4,6 +4,7 @@ export default function AdminPage() {
   const [password, setPassword] = useState('');
   const [authed, setAuthed]     = useState(false);
   const [chats, setChats]       = useState([]);
+  const [qrScans, setQrScans]   = useState([]);
   const [loading, setLoading]   = useState(false);
   const [error, setError]       = useState('');
   const [selected, setSelected] = useState(null);
@@ -17,7 +18,8 @@ export default function AdminPage() {
       const res = await fetch('/api/chats', { headers: { 'x-admin-password': password } });
       if (!res.ok) { setError('Wrong password.'); setLoading(false); return; }
       const data = await res.json();
-      setChats(data);
+      setChats(data.chats ?? []);
+      setQrScans(data.qrScans ?? []);
       setAuthed(true);
     } catch { setError('Could not connect. Try again.'); }
     setLoading(false);
@@ -27,7 +29,11 @@ export default function AdminPage() {
     setLoading(true);
     try {
       const res = await fetch('/api/chats', { headers: { 'x-admin-password': password } });
-      if (res.ok) { const data = await res.json(); setChats(data); }
+      if (res.ok) {
+        const data = await res.json();
+        setChats(data.chats ?? []);
+        setQrScans(data.qrScans ?? []);
+      }
     } catch {}
     setLoading(false);
   }
@@ -81,6 +87,30 @@ export default function AdminPage() {
             {loading ? '…' : '↻'}
           </button>
         </div>
+        {/* Stats */}
+        <div className="wa-stats">
+          <div className="wa-stat">
+            <span className="wa-stat-val">{chats.length}</span>
+            <span className="wa-stat-label">💬 Chats</span>
+          </div>
+          <div className="wa-stat-divider" />
+          <div className="wa-stat">
+            <span className="wa-stat-val">{qrScans.length}</span>
+            <span className="wa-stat-label">📱 QR Scans</span>
+          </div>
+          {qrScans.length > 0 && (
+            <>
+              <div className="wa-stat-divider" />
+              <div className="wa-stat">
+                <span className="wa-stat-val" style={{ fontSize: '.7rem' }}>
+                  {fmtTime(qrScans[0].scanned_at)}
+                </span>
+                <span className="wa-stat-label">Last scan</span>
+              </div>
+            </>
+          )}
+        </div>
+
         <div className="wa-search-wrap">
           <input className="wa-search" placeholder="Search conversations…"
             value={search} onChange={e => setSearch(e.target.value)} />

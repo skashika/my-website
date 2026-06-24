@@ -157,7 +157,7 @@ export default function BusinessCard({ onClose }) {
           <div className="bc-qr-wrap">
             <div className="bc-qr-card">
               <QRCodeSVG
-                value={buildVCard()}
+                value={`${SITE_URL}/api/qr-scan`}
                 size={200}
                 bgColor="#ffffff"
                 fgColor="#0f172a"

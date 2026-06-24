@@ -10,31 +10,33 @@ export default async function handler(req, res) {
   const apiKey    = process.env.FIREBASE_API_KEY;
 
   try {
-    // Fetch all conversation documents (no orderBy to avoid index requirement)
-    const response = await fetch(
-      `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents:runQuery?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          structuredQuery: {
-            from: [{ collectionId: 'conversations' }],
-            limit: 200,
-          },
-        }),
-      }
-    );
+    const query = (collectionId, limit) =>
+      fetch(
+        `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents:runQuery?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            structuredQuery: { from: [{ collectionId }], limit },
+          }),
+        }
+      );
 
-    if (!response.ok) {
-      const err = await response.text();
-      console.error('Firestore fetch error:', err);
+    const [convRes, qrRes] = await Promise.all([
+      query('conversations', 200),
+      query('qr_scans', 1000),
+    ]);
+
+    if (!convRes.ok) {
+      const err = await convRes.text();
+      console.error('Firestore conversations error:', err);
       return res.status(502).json({ error: 'Database error' });
     }
 
-    const raw = await response.json();
+    const rawConv = await convRes.json();
+    const rawQR   = qrRes.ok ? await qrRes.json() : [];
 
-    // Firestore returns an array; each item has a `document` field
-    const chats = raw
+    const chats = rawConv
       .filter(r => r.document)
       .map(r => {
         const f = r.document.fields;
@@ -48,7 +50,12 @@ export default async function handler(req, res) {
       })
       .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-    return res.status(200).json(chats);
+    const qrScans = rawQR
+      .filter(r => r.document)
+      .map(r => ({ scanned_at: r.document.fields?.scanned_at?.stringValue ?? '' }))
+      .sort((a, b) => new Date(b.scanned_at) - new Date(a.scanned_at));
+
+    return res.status(200).json({ chats, qrScans });
   } catch (err) {
     console.error('chats handler error:', err);
     return res.status(500).json({ error: 'Internal server error' });
