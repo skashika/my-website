@@ -19,6 +19,19 @@ export default function App() {
 
   return (
     <div className="site-shell">
+      <div className="top-banner">
+        <span className="top-banner-text">
+          Interested in AI-powered self-service solutions for your business?
+        </span>
+        <a
+          href="https://www.getrobotsolutions.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="top-banner-btn"
+        >
+          Visit Advanced Robot Solutions ↗
+        </a>
+      </div>
       <NavBar />
       <main>
         <HeroSection />

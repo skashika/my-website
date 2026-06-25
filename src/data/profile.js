@@ -2,7 +2,7 @@ export const profile = {
   name: 'Shubham Kashikar',
   title: 'Senior Software Developer / Tech Lead',
   location: 'United States',
-  email: 'shubhamkashikar29@gmail.com',
+  email: 'shubham@robotaisolutions.com',
   github: 'https://github.com/skashika',
   linkedin: '#',
   summary:

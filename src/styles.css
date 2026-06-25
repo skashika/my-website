@@ -1984,3 +1984,50 @@ img { display: block; max-width: 100%; }
   background: #2a3942;
   flex-shrink: 0;
 }
+
+/* ─── Top Banner ──────────────────────────────────────────────── */
+.top-banner {
+  width: 100%;
+  background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 60%, #4f46e5 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 10px 20px;
+  flex-wrap: wrap;
+  text-align: center;
+  position: relative;
+  z-index: 1000;
+}
+.top-banner-text {
+  font-size: .88rem;
+  font-weight: 500;
+  opacity: .95;
+  letter-spacing: .01em;
+}
+.top-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background: #fff;
+  color: #1e3a8a;
+  font-size: .82rem;
+  font-weight: 700;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .2s, color .2s, transform .15s;
+  flex-shrink: 0;
+}
+.top-banner-btn:hover {
+  background: #e0e7ff;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 540px) {
+  .top-banner      { gap: 10px; padding: 10px 16px; }
+  .top-banner-text { font-size: .82rem; }
+  .top-banner-btn  { font-size: .78rem; padding: 5px 14px; }
+}

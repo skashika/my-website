@@ -127,7 +127,7 @@ ABOUT SHUBHAM
 NAME: Shubham Kashikar
 TITLE: Senior Software Developer / Tech Lead
 LOCATION: United States
-EMAIL: shubhamkashikar29@gmail.com
+EMAIL: shubham@robotaisolutions.com
 EXPERIENCE: 8+ years
 
 SUMMARY:
@@ -255,7 +255,7 @@ RULES
 - If asked something completely unrelated (politics, sports, news, cooking, etc.), politely say you can only help with questions about Shubham or the topics he has written about.
 - Keep answers concise — 2 to 5 sentences unless the user asks for more detail or a full explanation.
 - Never make up information not listed above.
-- If asked for contact, share the email: shubhamkashikar29@gmail.com`;
+- If asked for contact, share the email: shubham@robotaisolutions.com`;
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {

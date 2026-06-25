@@ -2,7 +2,7 @@ const VCARD = `BEGIN:VCARD
 VERSION:3.0
 FN:Shubham Kashikar
 TITLE:Senior Software Developer / Tech Lead
-EMAIL:shubhamkashikar29@gmail.com
+EMAIL:shubham@robotaisolutions.com
 ADR:;;United States;;;;
 URL:https://shubhamkashikar.com
 NOTE:Full-stack software developer and technical lead with 8+ years of experience.
