@@ -12,21 +12,29 @@ export default async function handler(req, res) {
   const projectId = process.env.FIREBASE_PROJECT_ID;
   const apiKey    = process.env.FIREBASE_API_KEY;
 
-  // Log scan to Firestore (fire and forget)
+  // Await the Firestore write so Vercel doesn't terminate before it completes
   if (projectId && apiKey) {
-    fetch(
-      `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/qr_scans?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          fields: {
-            scanned_at: { stringValue: new Date().toISOString() },
-            user_agent: { stringValue: req.headers['user-agent'] ?? '' },
-          },
-        }),
+    try {
+      const logRes = await fetch(
+        `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/qr_scans?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            fields: {
+              scanned_at: { stringValue: new Date().toISOString() },
+              user_agent: { stringValue: req.headers['user-agent'] ?? '' },
+            },
+          }),
+        }
+      );
+      if (!logRes.ok) {
+        const err = await logRes.text();
+        console.error('QR scan log error:', err);
       }
-    ).catch(() => {});
+    } catch (err) {
+      console.error('QR scan log exception:', err);
+    }
   }
 
   // Serve the vCard file so phone prompts to save contact
