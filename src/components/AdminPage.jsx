@@ -5,6 +5,7 @@ export default function AdminPage() {
   const [authed, setAuthed]     = useState(false);
   const [chats, setChats]       = useState([]);
   const [qrScans, setQrScans]   = useState([]);
+  const [arsClicks, setArsClicks] = useState([]);
   const [loading, setLoading]   = useState(false);
   const [error, setError]       = useState('');
   const [selected, setSelected] = useState(null);
@@ -20,6 +21,7 @@ export default function AdminPage() {
       const data = await res.json();
       setChats(data.chats ?? []);
       setQrScans(data.qrScans ?? []);
+      setArsClicks(data.arsClicks ?? []);
       setAuthed(true);
     } catch { setError('Could not connect. Try again.'); }
     setLoading(false);
@@ -33,6 +35,7 @@ export default function AdminPage() {
         const data = await res.json();
         setChats(data.chats ?? []);
         setQrScans(data.qrScans ?? []);
+        setArsClicks(data.arsClicks ?? []);
       }
     } catch {}
     setLoading(false);
@@ -97,6 +100,11 @@ export default function AdminPage() {
           <div className="wa-stat">
             <span className="wa-stat-val">{qrScans.length}</span>
             <span className="wa-stat-label">📱 QR Scans</span>
+          </div>
+          <div className="wa-stat-divider" />
+          <div className="wa-stat">
+            <span className="wa-stat-val">{arsClicks.length}</span>
+            <span className="wa-stat-label">🤖 ARS Clicks</span>
           </div>
           {qrScans.length > 0 && (
             <>

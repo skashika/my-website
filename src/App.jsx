@@ -28,6 +28,7 @@ export default function App() {
           target="_blank"
           rel="noopener noreferrer"
           className="top-banner-btn"
+          onClick={() => fetch('/api/track-ars-click', { method: 'POST' }).catch(() => {})}
         >
           Visit Advanced Robot Solutions ↗
         </a>

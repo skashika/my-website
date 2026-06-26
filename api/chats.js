@@ -22,9 +22,10 @@ export default async function handler(req, res) {
         }
       );
 
-    const [convRes, qrRes] = await Promise.all([
+    const [convRes, qrRes, arsRes] = await Promise.all([
       query('conversations', 200),
       query('qr_scans', 1000),
+      query('ars_clicks', 1000),
     ]);
 
     if (!convRes.ok) {
@@ -34,7 +35,8 @@ export default async function handler(req, res) {
     }
 
     const rawConv = await convRes.json();
-    const rawQR   = qrRes.ok ? await qrRes.json() : [];
+    const rawQR   = qrRes.ok  ? await qrRes.json()  : [];
+    const rawARS  = arsRes.ok ? await arsRes.json() : [];
 
     const chats = rawConv
       .filter(r => r.document)
@@ -55,7 +57,12 @@ export default async function handler(req, res) {
       .map(r => ({ scanned_at: r.document.fields?.scanned_at?.stringValue ?? '' }))
       .sort((a, b) => new Date(b.scanned_at) - new Date(a.scanned_at));
 
-    return res.status(200).json({ chats, qrScans });
+    const arsClicks = rawARS
+      .filter(r => r.document)
+      .map(r => ({ clicked_at: r.document.fields?.clicked_at?.stringValue ?? '' }))
+      .sort((a, b) => new Date(b.clicked_at) - new Date(a.clicked_at));
+
+    return res.status(200).json({ chats, qrScans, arsClicks });
   } catch (err) {
     console.error('chats handler error:', err);
     return res.status(500).json({ error: 'Internal server error' });
