@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 const STARTERS = [
   'What does Shubham specialise in?',
-  'What projects has Shubham worked on?',
+  'What does Advanced Robot Solutions do?',
   'How can I contact Shubham?',
 ];
 
